@@ -1,0 +1,13 @@
+{
+  "name": "Cofre a Dois",
+  "short_name": "Cofre",
+  "description": "Controle financeiro do casal",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#F3F4F0",
+  "theme_color": "#0F6E63",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
