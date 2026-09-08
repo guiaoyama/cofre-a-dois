@@ -102,9 +102,9 @@ label.lbl{display:block;font-size:12px;color:var(--ink-2);font-weight:600;margin
 .inp:focus{border-color:var(--accent)}
 select.inp{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--ink-2) 50%),linear-gradient(135deg,var(--ink-2) 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:32px}
 .switch{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--surface-2);border-radius:var(--r-s)}
-.switch .tg{width:46px;height:28px;border-radius:999px;background:var(--ink-3);position:relative;transition:background .15s;flex:none}
-.switch .tg::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .15s}
-.switch .tg[aria-checked="true"]{background:var(--in)} .switch .tg[aria-checked="true"]::after{transform:translateX(18px)}
+.tg{width:46px;height:28px;border-radius:999px;background:var(--ink-3);position:relative;transition:background .15s;flex:none}
+.tg::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .15s}
+.tg[aria-checked="true"]{background:var(--in)} .tg[aria-checked="true"]::after{transform:translateX(18px)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 18px;border-radius:var(--r-s);font-weight:600;background:var(--surface-2);color:var(--ink);min-height:48px;transition:filter .15s}
 .btn:active{filter:brightness(.95)}
 .btn:disabled{opacity:.6;cursor:default}
@@ -130,9 +130,9 @@ select.inp{appearance:none;-webkit-appearance:none;background-image:linear-gradi
 .meter i.over{background:#FFB4AC}
 .hero .sub{margin-top:8px;font-size:13px;opacity:.9;display:flex;justify-content:space-between}
 .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.tile{background:var(--surface);border-radius:var(--r-s);padding:12px 12px 10px;box-shadow:var(--shadow);min-width:0}
-.tile small{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2);font-weight:600}
-.tile b{display:block;font-family:var(--display);font-size:18px;font-weight:700;margin-top:4px;font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tile{background:var(--surface);border-radius:var(--r-s);padding:10px 8px 9px 10px;box-shadow:var(--shadow);min-width:0}
+.tile small{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2);font-weight:600}
+.tile b{display:block;font-family:var(--display);font-size:clamp(12px,3.6vw,16px);font-weight:700;letter-spacing:-.03em;margin-top:4px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;line-height:1.2}
 .tile.in b{color:var(--in)} .tile.out b{color:var(--out)}
 .grp{display:flex;flex-direction:column;gap:8px;margin-top:8px}
 .grp-h{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--ink-2);text-transform:uppercase;letter-spacing:.08em}
@@ -184,8 +184,34 @@ select.inp{appearance:none;-webkit-appearance:none;background-image:linear-gradi
 .lc .v.in{color:var(--in)} .lc .v.out{color:var(--out)}
 .lc .m{grid-column:1;font-size:12px;color:var(--ink-2);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .lc .m .rt{color:var(--rc);font-weight:600}
-.lc .tag{grid-column:2;justify-self:end;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--surface-2);color:var(--ink-2)}
-.lc .tag.pago{background:var(--in-soft);color:var(--in)}
+.lc .tags{grid-column:2;justify-self:end;display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.lc .tags:empty{display:none}
+.tag{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);white-space:nowrap}
+.tag.pago{background:var(--in-soft);color:var(--in)}
+.tag.pend{background:var(--out-soft);color:var(--out)}
+.tag.cartao{background:var(--accent-soft);color:var(--accent)}
+
+/* contas programadas */
+.alerta{background:var(--out-soft);border:1px solid color-mix(in oklab,var(--out) 40%,transparent);border-radius:var(--r);padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.alerta h2{font-size:13px;color:var(--out);text-transform:uppercase;letter-spacing:.08em;font-weight:700;display:flex;align-items:center;gap:8px}
+.alerta h2::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--out);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.al{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 10px;padding:8px 0;border-top:1px dashed color-mix(in oklab,var(--out) 30%,transparent)}
+.al .n{font-weight:600;color:var(--ink)}
+.al .d{font-size:12px;color:var(--out);font-weight:600}
+.al .v{font-family:var(--display);font-weight:700;font-size:17px;color:var(--out);font-variant-numeric:tabular-nums;text-align:right}
+.al .btn-mini{grid-column:2;justify-self:end;background:var(--out);color:#fff}
+.prog{display:flex;flex-direction:column;gap:6px}
+.pg{--rc:var(--ink-3);display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:4px 12px;background:var(--surface-2);border-left:4px solid var(--rc);border-radius:var(--r-s);padding:10px 12px 10px 14px}
+.pg .n{grid-column:1;grid-row:1;font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pg .d{grid-column:1;grid-row:2;font-size:12px;color:var(--ink-2)}
+.pg .d.venc{color:var(--out);font-weight:600}
+.pg .v{grid-column:2;grid-row:1 / span 2;font-family:var(--display);font-weight:700;font-size:17px;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.pg .v.ok{color:var(--ink-3);text-decoration:line-through}
+.pg .tg{grid-column:3;grid-row:1 / span 2}
+.pg.pago{opacity:.75}
+.resumo{display:flex;justify-content:space-between;font-size:13px;color:var(--ink-2);margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.resumo b{font-family:var(--display);font-variant-numeric:tabular-nums;color:var(--ink)}
 .day{font-size:12px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin:6px 0 -6px}
 
 /* navegação */
@@ -285,7 +311,11 @@ const state = {
   filtros:{resp:'',tipo:'',cat:'',q:''},
   donutSel:null,
 };
-function novoDraft(){ return {tipo:'saida', cents:0, categoria:'', responsavel:'', data:hoje(), descricao:'', pago:false, erro:''}; }
+function novoDraft(){ return {tipo:'saida', cents:0, categoria:'', responsavel:'', data:hoje(), descricao:'', programada:false, pago:false, noCartao:false, erro:''}; }
+const DIAS_ALERTA = 3; // contas programadas pendentes vencendo em até N dias (ou já vencidas) aparecem no alerta
+const diffDias = iso => Math.round((new Date(iso+'T12:00:00') - new Date(hoje()+'T12:00:00')) / 86400000);
+const ehProgramada = l => l.tipo==='saida' && !!l.programada;
+const contaNoDisponivel = l => !l.noCartao; // compra já no cartão não entra nos totais: a fatura já a contém
 let store = null, auth = null, fdb = null;
 const CFG = window.COFRE_CONFIG || {};
 const unsubs = {lanc:null, cart:null, meses:null, cats:null};
@@ -480,7 +510,10 @@ function renderSemMes(){
 
 // ---------- LANÇAR ----------
 function renderLancar(){
+  const w = el(`<div class="stack"></div>`);
+  const al = renderAlerta(); if (al) w.appendChild(al);
   const card = el(`<div class="card"></div>`);
+  w.appendChild(card);
   card.appendChild(buildForm(state.draft, {
     modo:'novo',
     async onSave(model){
@@ -489,10 +522,33 @@ function renderLancar(){
       if (ok) { state.draft = {...novoDraft(), tipo:model.tipo, data:model.data}; render(); }
     },
   }));
-  return card;
+  return w;
+}
+function renderAlerta(){
+  const venc = state.lancamentos.filter(l => ehProgramada(l) && !l.pago && l.data && diffDias(l.data) <= DIAS_ALERTA)
+    .sort((a,b)=>String(a.data).localeCompare(String(b.data)));
+  if (!venc.length) return null;
+  const s = el(`<section class="alerta" role="alert"><h2>Contas vencendo</h2></section>`);
+  venc.forEach(l=>{
+    const d = diffDias(l.data); const c = catInfo(l.categoria);
+    const quando = d < 0 ? `Venceu ${fmtDataLonga(l.data)} (${-d} dia${-d>1?'s':''} atrás)` : d === 0 ? 'Vence hoje' : d === 1 ? 'Vence amanhã' : `Vence em ${d} dias · ${fmtDataLonga(l.data)}`;
+    const item = el(`<div class="al"><div><div class="n">${esc(l.descricao || c.nome)}</div><div class="d">${quando}</div></div><div class="v">${fmt(l.valor)}</div><button class="btn-mini">Marcar como paga</button></div>`);
+    item.querySelector('button').onclick = () => marcarPago(l.id, true);
+    s.appendChild(item);
+  });
+  return s;
+}
+async function marcarPago(id, pago){
+  const l = state.lancamentos.find(x=>x.id===id); if (!l) return;
+  await gravar(store.lancamentos.update(id, {pago:!!pago}), `${l.descricao || catInfo(l.categoria).nome}: ${pago?'paga':'pendente'}`);
+}
+function docCampos(m){
+  const saida = m.tipo==='saida';
+  return { tipo:m.tipo, valor:m.cents/100, data:m.data, categoria:m.categoria, responsavel:m.responsavel, descricao:(m.descricao||'').trim(),
+    programada: saida && !!m.programada, pago: saida && !!m.programada && !!m.pago, noCartao: saida && !!m.noCartao };
 }
 function modelToDoc(m){
-  return { mesId:state.mesSel, tipo:m.tipo, valor:m.cents/100, data:m.data, categoria:m.categoria, responsavel:m.responsavel, descricao:(m.descricao||'').trim(), pago:!!m.pago, criadoEm:agora() };
+  return { mesId:state.mesSel, ...docCampos(m), criadoEm:agora() };
 }
 function ligarValor(input, model){
   input.addEventListener('input', () => { const d = input.value.replace(/\D/g,'').slice(0,11); model.cents = Number(d||0); input.value = model.cents ? centsFmt(model.cents) : ''; });
@@ -527,6 +583,18 @@ function buildForm(model, {modo, onSave, onDelete}){
   add.onclick = () => abrirNovaCategoria(id => { model.categoria=id; rerender(); });
   chips.appendChild(add);
   f.appendChild(cw);
+  // conta programada / cartão (só para saídas)
+  const mkSwitch = (titulo, dica, campo, onToggle) => {
+    const sw = el(`<div class="switch"><div><b>${titulo}</b><div class="hint">${dica}</div></div><button class="tg" role="switch" aria-label="${titulo}"></button></div>`);
+    const tg = sw.querySelector('.tg'); tg.setAttribute('aria-checked', !!model[campo]);
+    tg.onclick = () => { model[campo] = !model[campo]; tg.setAttribute('aria-checked', model[campo]); if (onToggle) onToggle(); };
+    return sw;
+  };
+  if (model.tipo==='saida') {
+    f.appendChild(mkSwitch('Conta programada', 'Entra na lista de contas do mês e no alerta de vencimento', 'programada', rerender));
+    if (model.programada) f.appendChild(mkSwitch('Pago', 'Só um rótulo: não altera o cálculo', 'pago'));
+    f.appendChild(mkSwitch('Já está no cartão de crédito', 'Não entra nas saídas nem no disponível; a fatura já conta. Aparece só na rosca por categoria', 'noCartao'));
+  }
   // responsável
   const rw = el(`<div><label class="lbl">Responsável</label><div class="resp" role="group"></div></div>`);
   RESP_ORDER.forEach(k=>{
@@ -536,15 +604,12 @@ function buildForm(model, {modo, onSave, onDelete}){
     rw.querySelector('.resp').appendChild(b);
   });
   f.appendChild(rw);
-  // data + descrição
-  const row = el(`<div class="row2"><div><label class="lbl" for="f-data">Data</label><input class="inp" type="date" id="f-data"></div><div><label class="lbl" for="f-desc">Descrição</label><input class="inp" id="f-desc" placeholder="opcional" maxlength="120"></div></div>`);
+  // data e descrição, cada uma na sua linha
+  const progr = model.tipo==='saida' && model.programada;
+  const row = el(`<div class="stack"><div><label class="lbl" for="f-data">${progr ? 'Vencimento' : 'Data'}</label><input class="inp" type="date" id="f-data"></div><div><label class="lbl" for="f-desc">Descrição</label><input class="inp" id="f-desc" placeholder="${progr ? 'ex.: Aluguel, Luz, Internet' : 'opcional'}" maxlength="120"></div></div>`);
   const di = row.querySelector('#f-data'); di.value = model.data; di.onchange = () => { model.data = di.value || hoje(); };
   const de = row.querySelector('#f-desc'); de.value = model.descricao||''; de.oninput = () => { model.descricao = de.value; };
   f.appendChild(row);
-  // pago
-  const sw = el(`<div class="switch"><div><b>Pago</b><div class="hint">Só um rótulo: não altera o cálculo</div></div><button class="tg" role="switch" aria-label="Pago"></button></div>`);
-  const tg = sw.querySelector('.tg'); tg.setAttribute('aria-checked', !!model.pago); tg.onclick = () => { model.pago = !model.pago; tg.setAttribute('aria-checked', model.pago); };
-  f.appendChild(sw);
   // erro + ações
   if (model.erro) f.appendChild(el(`<div class="err" role="alert">${esc(model.erro)}</div>`));
   const save = el(`<button class="btn primary block">${modo==='novo' ? 'Salvar lançamento' : 'Salvar alterações'}</button>`);
@@ -593,9 +658,28 @@ function abrirNovaCategoria(cb){
 // ---------- PAINEL ----------
 function calc(){
   const ent = sum(state.lancamentos.filter(l=>l.tipo==='entrada'), l=>l.valor);
-  const sai = sum(state.lancamentos.filter(l=>l.tipo==='saida'), l=>l.valor);
+  const sai = sum(state.lancamentos.filter(l=>l.tipo==='saida' && contaNoDisponivel(l)), l=>l.valor);
+  const noCartao = sum(state.lancamentos.filter(l=>l.tipo==='saida' && l.noCartao), l=>l.valor);
   const car = sum(state.cartoes, c=>c.saldoAtual);
-  return {ent, sai, car, disp: ent - sai - car, comp: sai + car};
+  return {ent, sai, car, noCartao, disp: ent - sai - car, comp: sai + car};
+}
+function renderProgramadas(){
+  const s = el(`<section class="card"><h2>Contas programadas do mês</h2></section>`);
+  const lista = state.lancamentos.filter(ehProgramada).sort((a,b)=>String(a.data).localeCompare(String(b.data)) || String(a.descricao||'').localeCompare(String(b.descricao||''),'pt-BR'));
+  if (!lista.length) { s.appendChild(el(`<div class="empty">Nenhuma conta programada. Ao lançar uma saída, ligue "Conta programada".</div>`)); return s; }
+  const ul = el(`<div class="prog"></div>`);
+  lista.forEach(l=>{
+    const r = RESP[l.responsavel]; const c = catInfo(l.categoria); const d = l.data ? diffDias(l.data) : 99;
+    const venc = !l.pago && d <= DIAS_ALERTA;
+    const quando = l.pago ? `Paga · venc. ${fmtDataLonga(l.data)}` : d < 0 ? `Venceu ${fmtDataLonga(l.data)}` : d === 0 ? 'Vence hoje' : d === 1 ? 'Vence amanhã' : `Vence ${fmtDataLonga(l.data)}`;
+    const item = el(`<div class="pg ${l.pago?'pago':''}" style="--rc:${r?r.v:'var(--ink-3)'}"><div class="n">${esc(l.descricao || c.nome)}</div><div class="v ${l.pago?'ok':''}">${fmt(l.valor)}</div><button class="tg" role="switch" aria-label="Paga" aria-checked="${!!l.pago}"></button><div class="d ${venc?'venc':''}">${quando} · ${r?r.nome:''}${l.noCartao?' · no cartão':''}</div></div>`);
+    item.querySelector('.tg').onclick = () => marcarPago(l.id, !l.pago);
+    ul.appendChild(item);
+  });
+  s.appendChild(ul);
+  const pagas = lista.filter(l=>l.pago); const pend = lista.filter(l=>!l.pago);
+  s.appendChild(el(`<div class="resumo"><span>${pagas.length} de ${lista.length} paga${lista.length>1?'s':''}</span><span>Pendente: <b>${fmt(sum(pend,l=>l.valor))}</b></span></div>`));
+  return s;
 }
 function renderPainel(mes){
   const w = el(`<div class="stack"></div>`);
@@ -613,6 +697,8 @@ function renderPainel(mes){
     <div class="tile out"><small>Saídas</small><b>${fmt(t.sai)}</b></div>
     <div class="tile"><small>Cartões</small><b>${fmt(t.car)}</b></div>
   </div>`));
+  if (t.noCartao > 0) w.appendChild(el(`<div class="hint" style="margin-top:-6px;text-align:center">Mais ${fmt(t.noCartao)} em compras já lançadas no cartão de crédito, contadas na fatura.</div>`));
+  w.appendChild(renderProgramadas());
   // cartões
   const cc = el(`<section class="card"><h2>Cartões de crédito <button class="btn-mini">+ Cartão</button></h2></section>`);
   cc.querySelector('.btn-mini').onclick = abrirNovoCartao;
@@ -668,12 +754,14 @@ function renderDonut(){
     lg.appendChild(li);
   });
   s.appendChild(lg);
+  const nc = sum(saidas.filter(l=>l.noCartao), l=>l.valor);
+  if (nc > 0) s.appendChild(el(`<div class="hint" style="margin-top:10px">Inclui ${fmt(nc)} em compras feitas no cartão de crédito, que não entram nas saídas nem no disponível.</div>`));
   return s;
 }
 function renderResp(){
   const s = el(`<section class="card"><h2>Gastos por responsável</h2><div class="bars"></div><div class="hint" style="margin-top:10px">Saídas + saldo dos cartões. "Conjunto" é uma fatia própria, não é dividida entre os dois.</div></section>`);
   const bars = s.querySelector('.bars');
-  const vals = RESP_ORDER.map(k=>({k, v: sum(state.lancamentos.filter(l=>l.tipo==='saida'&&l.responsavel===k), l=>l.valor) + sum(state.cartoes.filter(c=>c.responsavel===k), c=>c.saldoAtual)}));
+  const vals = RESP_ORDER.map(k=>({k, v: sum(state.lancamentos.filter(l=>l.tipo==='saida'&&contaNoDisponivel(l)&&l.responsavel===k), l=>l.valor) + sum(state.cartoes.filter(c=>c.responsavel===k), c=>c.saldoAtual)}));
   const max = Math.max(...vals.map(x=>x.v), 0);
   vals.forEach(({k,v})=>{
     bars.appendChild(el(`<div class="bar" style="--rc:${RESP[k].v}"><span class="lab">${RESP[k].nome}</span><div class="tr"><i style="width:${max>0?Math.round(v/max*100):0}%;${v===0?'display:none':''}"></i></div><span class="val">${fmt(v)}</span></div>`));
@@ -783,7 +871,7 @@ function renderHistorico(){
         <div class="t"><span>${esc(l.descricao || c.nome)}</span></div>
         <div class="v ${l.tipo==='entrada'?'in':'out'}">${l.tipo==='entrada'?'+':'−'} ${fmt(l.valor)}</div>
         <div class="m"><span class="rt">${r?r.nome:'?'}</span><span>${esc(c.nome)}</span></div>
-        <span class="tag ${l.pago?'pago':''}">${l.pago?'Pago':'Pendente'}</span>
+        <div class="tags">${ehProgramada(l) ? `<span class="tag ${l.pago?'pago':'pend'}">${l.pago?'Paga':'Pendente'}</span>` : ''}${l.tipo==='saida' && l.noCartao ? '<span class="tag cartao">Cartão</span>' : ''}</div>
       </button>`);
       card.onclick = () => abrirEditar(l.id);
       lista.appendChild(card);
@@ -794,10 +882,10 @@ function renderHistorico(){
 }
 function abrirEditar(id){
   const l = state.lancamentos.find(x=>x.id===id); if (!l) return;
-  const model = {tipo:l.tipo, cents:Math.round((Number(l.valor)||0)*100), categoria:l.categoria, responsavel:l.responsavel, data:l.data||hoje(), descricao:l.descricao||'', pago:!!l.pago, erro:''};
+  const model = {tipo:l.tipo, cents:Math.round((Number(l.valor)||0)*100), categoria:l.categoria, responsavel:l.responsavel, data:l.data||hoje(), descricao:l.descricao||'', programada:!!l.programada, pago:!!l.pago, noCartao:!!l.noCartao, erro:''};
   const form = buildForm(model, {
     modo:'editar',
-    async onSave(m){ const ok = await gravar(store.lancamentos.update(l.id, {tipo:m.tipo, valor:m.cents/100, data:m.data, categoria:m.categoria, responsavel:m.responsavel, descricao:(m.descricao||'').trim(), pago:!!m.pago}), 'Lançamento atualizado'); if (ok) fecharSheet(); },
+    async onSave(m){ const ok = await gravar(store.lancamentos.update(l.id, docCampos(m)), 'Lançamento atualizado'); if (ok) fecharSheet(); },
     async onDelete(){ const ok = await gravar(store.lancamentos.del(l.id), 'Lançamento excluído'); if (ok) fecharSheet(); },
   });
   abrirSheet('Editar lançamento', form);
@@ -867,9 +955,9 @@ async function exportar(formato, escopo){
     filename = base+'.csv';
     const q = v => '"'+String(v??'').replace(/"/g,'""')+'"';
     const num = v => String(Number(v)||0).replace('.',',');
-    const rows = [['mes','registro','tipo','valor','data','categoria','responsavel','descricao','pago','cartao','ultima_atualizacao']];
-    lanc.slice().sort((a,b)=>String(a.data).localeCompare(String(b.data))).forEach(l=>rows.push([mesNome(l.mesId),'lancamento',l.tipo,num(l.valor),l.data,catInfo(l.categoria).nome,l.responsavel,l.descricao||'',l.pago?'sim':'nao','','']));
-    cart.forEach(c=>rows.push([mesNome(c.mesId),'cartao','cartao',num(c.saldoAtual),c.ultimaAtualizacao||'','',c.responsavel,'','',c.nome,c.ultimaAtualizacao||'']));
+    const rows = [['mes','registro','tipo','valor','data','categoria','responsavel','descricao','conta_programada','pago','no_cartao','cartao','ultima_atualizacao']];
+    lanc.slice().sort((a,b)=>String(a.data).localeCompare(String(b.data))).forEach(l=>rows.push([mesNome(l.mesId),'lancamento',l.tipo,num(l.valor),l.data,catInfo(l.categoria).nome,l.responsavel,l.descricao||'',l.programada?'sim':'nao',l.programada?(l.pago?'sim':'nao'):'',l.noCartao?'sim':'nao','','']));
+    cart.forEach(c=>rows.push([mesNome(c.mesId),'cartao','cartao',num(c.saldoAtual),c.ultimaAtualizacao||'','',c.responsavel,'','','','',c.nome,c.ultimaAtualizacao||'']));
     data = 'FEFF' + rows.map(r=>r.map(q).join(';')).join('\r\n');
   }
   try {
