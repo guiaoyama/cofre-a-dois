@@ -19,7 +19,7 @@ window.COFRE_CONFIG = {
   // 2) E-mails dos dois usuários que você cadastrou em
   //    Firebase > Authentication > Users. A senha é digitada na tela de login.
   usuarios: {
-    guilherme: "gui.aoyama@rocketmail.com",
-    julia: "juliamagni@hotmail.com",
+    guilherme: "guilherme@cofre.app",
+    julia: "julia@cofre.app",
   },
 };
