@@ -300,6 +300,7 @@ const CATS_PADRAO = [
   ['Mercado','#008300'],['Casa','#eb6834'],['Transporte','#2a78d6'],['Saúde','#e34948'],['Lazer','#e87ba4'],
   ['Assinaturas','#4a3aa7'],['Educação','#eda100'],['Salário','#1baf7a'],['Renda extra','#0e7c86'],['Outros','#8a8f98'],
 ];
+const VERSAO = '4'; // sobe a cada publicação; aparece no rodapé da folha "Meses"
 const MESES_PT = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 const brl = new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
 const fmt = v => brl.format(Number(v)||0);
@@ -916,10 +917,49 @@ function abrirSeletorMes(){
     lista.appendChild(b);
   });
   body.appendChild(lista);
-  const sair = el(`<button class="btn block" style="margin-top:6px">Sair da conta${state.usuario?' ('+esc(state.usuario)+')':''}</button>`);
+  const atual = state.meses.find(x=>x.id===state.mesSel);
+  if (atual) {
+    const exc = el(`<button class="btn danger block" style="margin-top:6px">Excluir ${esc(atual.nome)}…</button>`);
+    exc.onclick = () => abrirExcluirMes(atual);
+    body.appendChild(exc);
+  }
+  const sair = el(`<button class="btn block">Sair da conta${state.usuario?' ('+esc(state.usuario)+')':''}</button>`);
   sair.onclick = async () => { fecharSheet(); try { await signOut(auth); } catch(e){ toast('Não foi possível sair.'); } };
   body.appendChild(sair);
+  body.appendChild(el(`<div class="hint" style="text-align:center">Cofre a Dois · versão ${VERSAO}</div>`));
   abrirSheet('Meses', body);
+}
+function abrirExcluirMes(mes){
+  const nl = state.lancamentos.length, nc = state.cartoes.length;
+  const body = el(`<div class="stack">
+    <div class="banner"><b>Isso não pode ser desfeito.</b> Serão apagados o mês <b>${esc(mes.nome)}</b>, seus ${nl} lançamento${nl===1?'':'s'} e seus ${nc} cart${nc===1?'ão':'ões'}. As categorias e os outros meses não são afetados.</div>
+    <div><label class="lbl" for="x-conf">Para confirmar, digite <b>EXCLUIR</b></label><input class="inp" id="x-conf" autocomplete="off" autocapitalize="characters" placeholder="EXCLUIR"></div>
+  </div>`);
+  const conf = body.querySelector('#x-conf');
+  const btn = el(`<button class="btn danger block" disabled>Excluir ${esc(mes.nome)} definitivamente</button>`);
+  conf.oninput = () => { btn.disabled = conf.value.trim().toUpperCase() !== 'EXCLUIR'; btn.classList.toggle('arm', !btn.disabled); };
+  btn.onclick = async () => {
+    btn.disabled = true; btn.textContent = 'Excluindo…';
+    try {
+      const [lanc, cart] = await Promise.all([store.lancamentos.list(['mesId','==',mes.id]), store.cartoes.list(['mesId','==',mes.id])]);
+      const ops = lanc.map(l=>store.lancamentos.del(l.id)).concat(cart.map(c=>store.cartoes.del(c.id)));
+      const ok = await gravar(Promise.all(ops));
+      if (!ok) throw new Error('falha ao apagar registros');
+      // se o mês apagado era o atual, o mais recente que sobrar vira o atual
+      const restantes = state.meses.filter(x=>x.id!==mes.id);
+      const ops2 = [store.meses.del(mes.id)];
+      if (mes.ativo && restantes.length) ops2.push(store.meses.update(restantes[0].id, {ativo:true}));
+      const ok2 = await gravar(Promise.all(ops2), `${mes.nome} excluído`);
+      if (!ok2) throw new Error('falha ao apagar o mês');
+      fecharSheet();
+      state.filtros={resp:'',tipo:'',cat:'',q:''}; state.tab='lancar';
+      selecionarMes(restantes.length ? restantes[0].id : null);
+    } catch(e) { console.error(e); btn.textContent = 'Tentar de novo'; btn.disabled = false; }
+  };
+  body.appendChild(btn);
+  const volta = el(`<button class="btn block">Cancelar</button>`); volta.onclick = () => { fecharSheet(); abrirSeletorMes(); };
+  body.appendChild(volta);
+  abrirSheet('Excluir mês', body);
 }
 function abrirNovoMes(){
   const d = new Date(); let ano=d.getFullYear(), mes=d.getMonth()+1;
