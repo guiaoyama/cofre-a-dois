@@ -59,7 +59,9 @@ h1,h2,h3{margin:0;font-family:var(--display);font-weight:700;text-wrap:balance}
 .top{position:sticky;top:0;z-index:20;background:color-mix(in oklab,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:12px 16px 10px;display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line)}
 .brand{display:flex;flex-direction:column;line-height:1.1}
 .brand b{font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:-.01em}
-.brand small{font-size:11px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:6px;margin-top:3px}
+.brand{min-width:0}
+.brand small{font-size:11px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:6px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw}
+.brand small span:last-child{overflow:hidden;text-overflow:ellipsis}
 .sync-dot{width:7px;height:7px;border-radius:50%;background:var(--ink-3);display:inline-block}
 .sync-dot.ok{background:var(--in)} .sync-dot.busy{background:var(--c)} .sync-dot.local{background:var(--out)}
 .mes-btn{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:9px 12px 9px 14px;font-family:var(--display);font-weight:700;font-size:15px;box-shadow:var(--shadow);max-width:60%}
@@ -96,7 +98,6 @@ label.lbl{display:block;font-size:12px;color:var(--ink-2);font-weight:600;margin
 .resp button{--rc:var(--ink-3);padding:13px 6px;border-radius:var(--r-s);background:var(--surface-2);font-weight:600;display:flex;flex-direction:column;align-items:center;gap:6px;border:2px solid transparent;transition:all .15s}
 .resp button::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--rc)}
 .resp button[aria-pressed="true"]{background:color-mix(in oklab,var(--rc) 16%,var(--surface));border-color:var(--rc);color:var(--ink)}
-.resp .r-g{--rc:var(--g)} .resp .r-j{--rc:var(--j)} .resp .r-c{--rc:var(--c)}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .inp{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:var(--r-s);padding:11px 12px;outline:none;min-height:44px}
 .inp:focus{border-color:var(--accent)}
@@ -171,9 +172,7 @@ select.inp{appearance:none;-webkit-appearance:none;background-image:linear-gradi
 .fr::-webkit-scrollbar{display:none}
 .pill{flex:none;padding:7px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:13px;font-weight:500}
 .pill[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.pill.r-g[aria-pressed="true"]{background:var(--g);border-color:var(--g);color:#fff}
-.pill.r-j[aria-pressed="true"]{background:var(--j);border-color:var(--j);color:#fff}
-.pill.r-c[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:#fff}
+.pill.rc[aria-pressed="true"]{background:var(--pc);border-color:var(--pc);color:#fff}
 .pill.t-in[aria-pressed="true"]{background:var(--in);border-color:var(--in);color:#fff}
 .pill.t-out[aria-pressed="true"]{background:var(--out);border-color:var(--out);color:#fff}
 .lc{--rc:var(--ink-3);--cc:var(--ink-3);width:100%;text-align:left;background:var(--surface);border-radius:var(--r-s);padding:12px 14px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr auto;gap:4px 12px;border-left:4px solid var(--rc)}
@@ -259,7 +258,15 @@ nav button svg{width:24px;height:24px}
 .login .quem button{--rc:var(--ink-3);padding:18px 10px;border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow);font-family:var(--display);font-weight:700;font-size:18px;display:flex;flex-direction:column;align-items:center;gap:10px;border:2px solid transparent}
 .login .quem button::before{content:"";width:18px;height:18px;border-radius:50%;background:var(--rc)}
 .login .quem button[aria-pressed="true"]{border-color:var(--rc);background:color-mix(in oklab,var(--rc) 12%,var(--surface))}
-.login .quem .r-g{--rc:var(--g)} .login .quem .r-j{--rc:var(--j)}
+/* administração */
+.adm-casa{background:var(--surface);border-radius:var(--r-s);padding:12px 14px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px}
+.adm-casa h4{margin:0;font-family:var(--display);font-size:16px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.adm-p{--rc:var(--ink-3);display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:6px 0;border-top:1px dashed var(--line)}
+.adm-p::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--rc)}
+.adm-p .n{font-weight:600} .adm-p .e{font-size:12px;color:var(--ink-2);overflow-wrap:anywhere}
+.adm-p .btn-mini{background:var(--surface-2);color:var(--ink-2)}
+.progresso{height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden}
+.progresso i{display:block;height:100%;background:var(--accent);transition:width .3s}
 .login .setup{background:var(--surface);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);font-size:14px;line-height:1.5}
 .login .setup code{background:var(--surface-2);padding:1px 6px;border-radius:6px;font-size:13px}
 </style>
@@ -285,22 +292,29 @@ nav button svg{width:24px;height:24px}
 <script src="config.js"></script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager, collection, doc, setDoc, updateDoc, deleteDoc, getDocs, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager, collection, doc, setDoc, updateDoc, deleteDoc, getDoc, getDocs, query, where, limit, onSnapshot, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 'use strict';
 // ---------- constantes ----------
-const RESP = {
-  guilherme:{nome:'Guilherme', cls:'r-g', v:'var(--g)'},
-  julia:{nome:'Julia', cls:'r-j', v:'var(--j)'},
-  conjunto:{nome:'Conjunto', cls:'r-c', v:'var(--c)'},
-};
-const RESP_ORDER = ['guilherme','julia','conjunto'];
+// Responsáveis vêm das pessoas cadastradas na casa (state.membros); "Conjunto" só existe em casa com 2 ou mais pessoas.
+let RESP = {}, RESP_ORDER = [];
+const COR_CONJUNTO = 'var(--c)';
+const CORES_PESSOA = ['#2F6FD6','#C2477A','#1E8A5A','#7A4FD1','#0E7C86','#D1682B','#5B6B2A','#B03A2E'];
+function montarResp(){
+  RESP = {}; RESP_ORDER = [];
+  state.membros.forEach(m => { RESP[m.chave] = {nome:m.nome, v:m.cor || CORES_PESSOA[0], email:m.email}; RESP_ORDER.push(m.chave); });
+  if (state.membros.length >= 2) { RESP.conjunto = {nome:'Conjunto', v:COR_CONJUNTO}; RESP_ORDER.push('conjunto'); }
+}
+const respNome = k => RESP[k] ? RESP[k].nome : (k ? '(removido)' : '');
+const respCor = k => RESP[k] ? RESP[k].v : 'var(--ink-3)';
+const casaSolo = () => state.membros.length === 1; // casa de uma pessoa: não pergunta responsável
+const slug = s => String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') || 'pessoa';
 const SWATCHES = ['#008300','#eb6834','#2a78d6','#e34948','#e87ba4','#4a3aa7','#eda100','#1baf7a','#0e7c86','#8a8f98'];
 const CATS_PADRAO = [
   ['Mercado','#008300'],['Casa','#eb6834'],['Transporte','#2a78d6'],['Saúde','#e34948'],['Lazer','#e87ba4'],
   ['Assinaturas','#4a3aa7'],['Educação','#eda100'],['Salário','#1baf7a'],['Renda extra','#0e7c86'],['Outros','#8a8f98'],
 ];
-const VERSAO = '4'; // sobe a cada publicação; aparece no rodapé da folha "Meses"
+const VERSAO = '5'; // sobe a cada publicação; aparece no rodapé da folha "Meses"
 const MESES_PT = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 const brl = new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
 const fmt = v => brl.format(Number(v)||0);
@@ -317,6 +331,7 @@ const centsFmt = c => (c/100).toLocaleString('pt-BR',{minimumFractionDigits:2,ma
 const state = {
   modo:'conectando', pendentes:0,
   meses:[], categorias:[], lancamentos:[], cartoes:[],
+  membros:[], perfil:null, casaId:null, casa:null, admin:false, usuario:null, email:null,
   mesSel:null, tab:'lancar',
   draft: novoDraft(),
   filtros:{resp:'',tipo:'',cat:'',q:''},
@@ -329,23 +344,31 @@ const ehProgramada = l => l.tipo==='saida' && !!l.programada;
 const contaNoDisponivel = l => !l.noCartao; // compra já no cartão não entra nos totais: a fatura já a contém
 let store = null, auth = null, fdb = null;
 const CFG = window.COFRE_CONFIG || {};
-const unsubs = {lanc:null, cart:null, meses:null, cats:null};
+const unsubs = {lanc:null, cart:null, meses:null, cats:null, membros:null};
 
 // ---------- armazenamento (Firebase Firestore) ----------
-function makeFsStore(){
+// Cada casa tem suas próprias coleções em casas/{casaId}/...; as regras do servidor só deixam membros da casa entrarem nelas.
+const lerDocs = s => s.docs.map(d => ({id:d.id, ...d.data()}));
+function makeFsStore(base){
+  const colRef = n => collection(fdb, ...base, n);
+  const docRef = (n, id) => doc(fdb, ...base, n, id);
   const col = n => ({
     sub(w, cb, err){
-      const q = w ? query(collection(fdb, n), where(w[0], w[1], w[2])) : collection(fdb, n);
-      return onSnapshot(q, s => cb(s.docs.map(d => ({id:d.id, ...d.data()})), s.metadata), err);
+      const q = w ? query(colRef(n), where(w[0], w[1], w[2])) : colRef(n);
+      return onSnapshot(q, s => cb(lerDocs(s), s.metadata), err);
     },
-    set:(id, d) => setDoc(doc(fdb, n, id), d),
-    update:(id, p) => updateDoc(doc(fdb, n, id), p),
-    del:(id) => deleteDoc(doc(fdb, n, id)),
-    all: async () => { const s = await getDocs(collection(fdb, n)); return s.docs.map(d => ({id:d.id, ...d.data()})); },
-    list: async (w) => { const s = await getDocs(query(collection(fdb, n), where(w[0], w[1], w[2]))); return s.docs.map(d => ({id:d.id, ...d.data()})); },
+    set:(id, d) => setDoc(docRef(n, id), d),
+    update:(id, p) => updateDoc(docRef(n, id), p),
+    del:(id) => deleteDoc(docRef(n, id)),
+    all: async () => lerDocs(await getDocs(colRef(n))),
+    list: async (w) => lerDocs(await getDocs(query(colRef(n), where(w[0], w[1], w[2])))),
   });
   return {meses:col('meses'), categorias:col('categorias'), lancamentos:col('lancamentos'), cartoes:col('cartoes')};
 }
+const usuariosRef = () => collection(fdb, 'usuarios');
+const usuarioRef = email => doc(fdb, 'usuarios', String(email).toLowerCase());
+const casasRef = () => collection(fdb, 'casas');
+const casaRef = id => doc(fdb, 'casas', id);
 async function gravar(p, okMsg){
   state.pendentes++; renderSync();
   // Com o cache local do Firestore a gravação só resolve quando o servidor confirma;
@@ -379,17 +402,20 @@ function configOk(){
   const f = CFG.firebase || {};
   return ['apiKey','authDomain','projectId','appId'].every(k => f[k] && !String(f[k]).includes('COLE_AQUI'));
 }
-function nomeUsuario(email){
-  const u = CFG.usuarios || {};
-  const k = Object.keys(u).find(k => String(u[k]).toLowerCase() === String(email||'').toLowerCase());
-  return k && RESP[k] ? RESP[k].nome : (email || '');
-}
 function limparSubs(){
   Object.keys(unsubs).forEach(k => { if (unsubs[k]) unsubs[k](); unsubs[k] = null; });
-  state.meses = []; state.categorias = []; state.lancamentos = []; state.cartoes = []; state.mesSel = null;
+  state.meses = []; state.categorias = []; state.lancamentos = []; state.cartoes = []; state.membros = []; state.mesSel = null;
+  state.perfil = null; state.casaId = null; state.casa = null; state.admin = false; state.usuario = null;
+  montarResp();
 }
 let seedTentado = false;
 function assinar(){
+  unsubs.membros = onSnapshot(query(usuariosRef(), where('casaId','==',state.casaId)), s => {
+    state.membros = lerDocs(s).map(u => ({...u, email:u.id})).sort((a,b)=>(Number(a.ordem??99)-Number(b.ordem??99))||String(a.nome).localeCompare(String(b.nome),'pt-BR'));
+    montarResp();
+    render();
+  }, onErrSub);
+  getDoc(casaRef(state.casaId)).then(s => { if (s.exists()) { state.casa = {id:s.id, ...s.data()}; render(); } }).catch(()=>{});
   unsubs.meses = store.meses.sub(null, docs => {
     state.meses = docs.slice().sort((a,b)=>(Number(b.ano||0)-Number(a.ano||0))||(Number(b.mes||0)-Number(a.mes||0))||String(b.dataCriacao||'').localeCompare(String(a.dataCriacao||'')));
     if (!state.mesSel || !state.meses.some(m=>m.id===state.mesSel)) {
@@ -416,13 +442,28 @@ async function init(){
     auth = getAuth(app);
     fdb = initializeFirestore(app, { localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }) });
   } catch(e) { console.error(e); state.modo = 'config'; render(); toast('Configuração do Firebase inválida.'); return; }
-  store = makeFsStore();
   onAuthStateChanged(auth, user => {
-    if (!user) { limparSubs(); state.usuario = null; state.modo = 'login'; render(); return; }
-    state.usuario = nomeUsuario(user.email); state.loginErro = '';
-    state.modo = 'db'; state.tab = 'lancar';
-    assinar(); render();
+    if (!user) { limparSubs(); store = null; state.modo = 'login'; render(); return; }
+    entrarNaCasa(user);
   });
+}
+async function entrarNaCasa(user){
+  limparSubs();
+  state.email = String(user.email || '').toLowerCase(); state.loginErro = '';
+  state.modo = 'conectando'; render();
+  let perfil = null;
+  try { const s = await getDoc(usuarioRef(state.email)); if (s.exists()) perfil = {id:s.id, ...s.data()}; }
+  catch(e) { console.error(e); toast('Não foi possível ler seu cadastro. Verifique a internet e as regras do Firestore.'); state.modo = 'semcasa'; render(); return; }
+  if (!perfil || !perfil.casaId) {
+    // Sem cadastro. Se for o administrador (as regras deixam só ele listar usuários), abre a configuração inicial.
+    let admin = false;
+    try { await getDocs(query(usuariosRef(), limit(1))); admin = true; } catch(e) { admin = false; }
+    state.admin = admin; state.modo = admin ? 'setup' : 'semcasa'; render(); return;
+  }
+  state.perfil = perfil; state.casaId = perfil.casaId; state.admin = !!perfil.admin; state.usuario = perfil.nome || state.email;
+  store = makeFsStore(['casas', state.casaId]);
+  state.modo = 'db'; state.tab = 'lancar';
+  assinar(); render();
 }
 function selecionarMes(id){
   state.mesSel = id; state.donutSel = null;
@@ -451,6 +492,8 @@ function render(){
   document.getElementById('mes-btn').hidden = !logado;
   if (state.modo==='config') { main.appendChild(renderConfigPendente()); return; }
   if (state.modo==='login') { main.appendChild(renderLogin()); return; }
+  if (state.modo==='setup') { main.appendChild(renderSetup()); return; }
+  if (state.modo==='semcasa') { main.appendChild(renderSemCasa()); return; }
   if (state.modo==='conectando') { main.appendChild(el(`<div class="empty">Conectando ao cofre…</div>`)); return; }
   if (!mes) { main.appendChild(renderSemMes()); return; }
   if (state.tab==='lancar') main.appendChild(renderLancar());
@@ -463,6 +506,8 @@ function renderSync(){
   const quem = state.usuario ? ' · '+state.usuario : '';
   if (state.modo==='config'){ dot.className='sync-dot local'; txt.textContent='Configuração pendente'; }
   else if (state.modo==='login'){ dot.className='sync-dot'; txt.textContent='Entre para continuar'; }
+  else if (state.modo==='setup'){ dot.className='sync-dot busy'; txt.textContent='Configuração inicial'; }
+  else if (state.modo==='semcasa'){ dot.className='sync-dot local'; txt.textContent='Sem casa vinculada'; }
   else if (state.modo==='conectando'){ dot.className='sync-dot'; txt.textContent='Conectando'; }
   else if (!navigator.onLine){ dot.className='sync-dot busy'; txt.textContent='Sem internet'+quem; }
   else if (state.pendentes>0){ dot.className='sync-dot busy'; txt.textContent='Salvando…'+quem; }
@@ -473,37 +518,210 @@ function renderConfigPendente(){
   return el(`<div class="login"><div class="logo"><svg width="40" height="40" viewBox="0 0 512 512"><circle cx="256" cy="256" r="150" fill="none" stroke="#fff" stroke-width="34"/><circle cx="256" cy="256" r="46" fill="#fff"/></svg></div>
     <h1>Falta configurar</h1>
     <p>O app ainda não sabe qual banco usar.</p>
-    <div class="setup">Abra o arquivo <code>config.js</code> e cole o <code>firebaseConfig</code> do seu projeto no Firebase, além dos dois e-mails de acesso. O passo a passo completo está no <code>README.md</code>.</div></div>`);
+    <div class="setup">Abra o arquivo <code>config.js</code> e cole o <code>firebaseConfig</code> do seu projeto no Firebase. O passo a passo completo está no <code>README.md</code>.</div></div>`);
 }
+const LOGO = `<div class="logo"><svg width="40" height="40" viewBox="0 0 512 512"><circle cx="256" cy="256" r="150" fill="none" stroke="#fff" stroke-width="34"/><circle cx="256" cy="256" r="46" fill="#fff"/></svg></div>`;
+function lembrarEmail(v){ try { if (v==null) return localStorage.getItem('cofre.email') || ''; localStorage.setItem('cofre.email', v); } catch(e){} return v; }
 function renderLogin(){
-  const m = {quem: state.loginQuem || '', senha:'', erro: state.loginErro || ''};
-  const w = el(`<div class="login">
-    <div class="logo"><svg width="40" height="40" viewBox="0 0 512 512"><circle cx="256" cy="256" r="150" fill="none" stroke="#fff" stroke-width="34"/><circle cx="256" cy="256" r="46" fill="#fff"/></svg></div>
-    <div><h1>Cofre a Dois</h1><p>Quem está entrando?</p></div>
-    <div class="quem"><button class="r-g" data-q="guilherme">Guilherme</button><button class="r-j" data-q="julia">Julia</button></div>
+  const m = {email: lembrarEmail(), senha:''};
+  const w = el(`<div class="login">${LOGO}
+    <div><h1>Cofre a Dois</h1><p>Entre com seu e-mail e senha.</p></div>
+    <div><label class="lbl" for="l-email">E-mail</label><input class="inp" type="email" id="l-email" autocomplete="username" inputmode="email" autocapitalize="off" placeholder="voce@exemplo.com"></div>
     <div><label class="lbl" for="l-senha">Senha</label><input class="inp" type="password" id="l-senha" autocomplete="current-password" placeholder="••••••••"></div>
     <div class="err" role="alert" id="l-erro"></div>
     <button class="btn primary block" id="l-entrar">Entrar</button>
-    <p class="hint">A identificação aqui não define o responsável dos lançamentos. Isso é sempre perguntado a cada registro.</p>
+    <button class="btn block" id="l-esqueci">Esqueci minha senha</button>
+    <p class="hint">Quem entra não vira o responsável dos lançamentos: isso é perguntado a cada registro.</p>
   </div>`);
-  const btns = w.querySelectorAll('.quem button');
-  const mark = () => btns.forEach(b=>b.setAttribute('aria-pressed', b.dataset.q===m.quem));
-  btns.forEach(b=>b.onclick=()=>{ m.quem=b.dataset.q; state.loginQuem=m.quem; mark(); w.querySelector('#l-senha').focus(); });
-  mark();
+  const ei = w.querySelector('#l-email'); ei.value = m.email; ei.oninput = () => { m.email = ei.value.trim(); };
   const si = w.querySelector('#l-senha'); si.oninput = () => { m.senha = si.value; };
-  const err = w.querySelector('#l-erro'); err.textContent = m.erro;
+  const err = w.querySelector('#l-erro'); err.textContent = state.loginErro || '';
   const entrar = w.querySelector('#l-entrar');
   const go = async () => {
-    if (!m.quem) { err.textContent='Escolha quem está entrando.'; return; }
-    if (!m.senha) { err.textContent='Digite a senha.'; return; }
-    const email = (CFG.usuarios||{})[m.quem];
-    if (!email) { err.textContent='E-mail não configurado em config.js.'; return; }
+    if (!m.email) { err.textContent='Digite o e-mail.'; ei.focus(); return; }
+    if (!m.senha) { err.textContent='Digite a senha.'; si.focus(); return; }
     entrar.disabled = true; err.textContent=''; state.loginErro='';
-    try { await signInWithEmailAndPassword(auth, email, m.senha); }
+    try { await signInWithEmailAndPassword(auth, m.email, m.senha); lembrarEmail(m.email.toLowerCase()); }
     catch(e){ console.warn(e); err.textContent = msgLogin(e); entrar.disabled=false; }
   };
-  entrar.onclick = go; si.onkeydown = e => { if (e.key==='Enter') go(); };
+  entrar.onclick = go; si.onkeydown = e => { if (e.key==='Enter') go(); }; ei.onkeydown = e => { if (e.key==='Enter') si.focus(); };
+  w.querySelector('#l-esqueci').onclick = async () => {
+    if (!m.email) { err.textContent='Digite o e-mail para receber o link de redefinição.'; ei.focus(); return; }
+    try { await sendPasswordResetEmail(auth, m.email); toast('Se o e-mail estiver cadastrado, enviamos um link para redefinir a senha.'); }
+    catch(e){ console.warn(e); err.textContent = /invalid-email/.test(e && e.code || '') ? 'E-mail inválido.' : 'Não foi possível enviar o e-mail agora.'; }
+  };
+  setTimeout(()=>(m.email ? si : ei).focus(), 50);
   return w;
+}
+function renderSemCasa(){
+  const w = el(`<div class="login">${LOGO}
+    <div><h1>Quase lá</h1><p>Você entrou como <b>${esc(state.email)}</b>, mas esse e-mail ainda não está vinculado a nenhuma casa.</p></div>
+    <div class="setup">Peça a quem administra o Cofre a Dois para cadastrar este e-mail em uma casa. Depois é só entrar de novo.</div>
+  </div>`);
+  const sair = el(`<button class="btn block">Sair</button>`); sair.onclick = () => signOut(auth); w.appendChild(sair);
+  return w;
+}
+
+// ---------- CONFIGURAÇÃO INICIAL (só o administrador, uma vez) ----------
+function swatchesPessoa(m, campo){
+  const sw = el(`<div class="swatches"></div>`);
+  const draw = () => { sw.innerHTML=''; CORES_PESSOA.forEach(c=>{ const b=el(`<button type="button" class="swatch" style="--sw:${c}" aria-label="${c}"></button>`); b.setAttribute('aria-pressed', m[campo]===c); b.onclick=()=>{ m[campo]=c; draw(); }; sw.appendChild(b); }); };
+  draw(); return sw;
+}
+function renderSetup(){
+  // Casa do administrador. As chaves "guilherme" e "julia" precisam continuar iguais porque os lançamentos antigos usam esses valores em "responsavel".
+  const m = state.setup || (state.setup = { casaNome:'Guilherme e Julia', p1:{email:state.email, nome:'Guilherme', chave:'guilherme', cor:CORES_PESSOA[0]}, p2:{email:'', nome:'Julia', chave:'julia', cor:CORES_PESSOA[1]}, legado:null });
+  const w = el(`<div class="login">${LOGO}
+    <div><h1>Configuração inicial</h1><p>Você entrou como administrador (<b>${esc(state.email)}</b>). Vamos criar a sua casa e mover os dados que já existem para dentro dela.</p></div>
+    <div class="card stack">
+      <div><label class="lbl" for="s-casa">Nome da casa</label><input class="inp" id="s-casa" maxlength="40"></div>
+      <div><label class="lbl">Pessoa 1 (você)</label><div class="stack" style="gap:8px"><input class="inp" id="s-p1n" placeholder="Nome" maxlength="30"><div class="hint">E-mail: ${esc(state.email)} · chave: <code>${esc(m.p1.chave)}</code></div><div id="s-p1c"></div></div></div>
+      <div><label class="lbl">Pessoa 2 (deixe o e-mail vazio se a casa for só sua)</label><div class="stack" style="gap:8px"><input class="inp" id="s-p2e" type="email" placeholder="E-mail da segunda pessoa" autocapitalize="off"><input class="inp" id="s-p2n" placeholder="Nome" maxlength="30"><div class="hint">chave: <code>${esc(m.p2.chave)}</code></div><div id="s-p2c"></div></div></div>
+      <div class="hint" id="s-legado">Verificando dados existentes…</div>
+      <div class="err" id="s-erro" role="alert"></div>
+      <button class="btn primary block" id="s-ok">Criar casa e migrar dados</button>
+      <div class="progresso" id="s-prog" hidden><i style="width:0%"></i></div>
+    </div>
+  </div>`);
+  const q = s => w.querySelector(s);
+  q('#s-casa').value = m.casaNome; q('#s-casa').oninput = e => { m.casaNome = e.target.value; };
+  q('#s-p1n').value = m.p1.nome; q('#s-p1n').oninput = e => { m.p1.nome = e.target.value; };
+  q('#s-p2e').value = m.p2.email; q('#s-p2e').oninput = e => { m.p2.email = e.target.value.trim().toLowerCase(); };
+  q('#s-p2n').value = m.p2.nome; q('#s-p2n').oninput = e => { m.p2.nome = e.target.value; };
+  q('#s-p1c').appendChild(swatchesPessoa(m.p1, 'cor')); q('#s-p2c').appendChild(swatchesPessoa(m.p2, 'cor'));
+  const legadoEl = q('#s-legado');
+  const contarLegado = async () => {
+    try {
+      const [me, la, ca, cat] = await Promise.all(['meses','lancamentos','cartoes','categorias'].map(n => getDocs(collection(fdb, n))));
+      m.legado = {meses:lerDocs(me), lancamentos:lerDocs(la), cartoes:lerDocs(ca), categorias:lerDocs(cat)};
+      const t = m.legado.meses.length + m.legado.lancamentos.length + m.legado.cartoes.length + m.legado.categorias.length;
+      legadoEl.textContent = t ? `Encontrados ${m.legado.meses.length} meses, ${m.legado.lancamentos.length} lançamentos, ${m.legado.cartoes.length} cartões e ${m.legado.categorias.length} categorias para mover.` : 'Nenhum dado antigo encontrado; a casa começa vazia.';
+    } catch(e) { console.error(e); m.legado = null; legadoEl.textContent = 'Não consegui ler os dados antigos (regras do Firestore publicadas?). Você pode criar a casa mesmo assim.'; }
+  };
+  contarLegado();
+  const erro = q('#s-erro'), ok = q('#s-ok'), prog = q('#s-prog');
+  ok.onclick = async () => {
+    erro.textContent = '';
+    if (!m.casaNome.trim()) return erro.textContent = 'Dê um nome à casa.';
+    if (!m.p1.nome.trim()) return erro.textContent = 'Informe seu nome.';
+    if (m.p2.email && !m.p2.nome.trim()) return erro.textContent = 'Informe o nome da segunda pessoa.';
+    if (m.p2.email && m.p2.email === state.email) return erro.textContent = 'O e-mail da segunda pessoa é igual ao seu.';
+    ok.disabled = true; prog.hidden = false; const bar = prog.querySelector('i');
+    try {
+      const casaId = 'principal';
+      const b0 = writeBatch(fdb);
+      b0.set(casaRef(casaId), {nome:m.casaNome.trim(), criadoEm:agora()});
+      b0.set(usuarioRef(state.email), {casaId, nome:m.p1.nome.trim(), chave:m.p1.chave, cor:m.p1.cor, admin:true, ordem:0, criadoEm:agora()});
+      if (m.p2.email) b0.set(usuarioRef(m.p2.email), {casaId, nome:m.p2.nome.trim(), chave:m.p2.chave, cor:m.p2.cor, admin:false, ordem:1, criadoEm:agora()});
+      await b0.commit();
+      if (m.legado) {
+        const itens = [];
+        for (const n of ['meses','lancamentos','cartoes','categorias']) m.legado[n].forEach(d => itens.push({n, d}));
+        for (let i = 0; i < itens.length; i += 200) {
+          const b = writeBatch(fdb);
+          itens.slice(i, i+200).forEach(({n, d}) => { const {id, ...dados} = d; b.set(doc(fdb, 'casas', casaId, n, id), dados); b.delete(doc(fdb, n, id)); });
+          await b.commit();
+          bar.style.width = Math.round(Math.min(i+200, itens.length) / itens.length * 100) + '%';
+        }
+      }
+      bar.style.width = '100%';
+      toast('Casa criada. Entrando…');
+      state.setup = null;
+      entrarNaCasa({email: state.email});
+    } catch(e) { console.error(e); erro.textContent = 'Falhou: ' + msgErro(e); ok.disabled = false; }
+  };
+  return w;
+}
+
+// ---------- ADMINISTRAÇÃO ----------
+async function abrirAdmin(){
+  const body = el(`<div class="stack"><div class="empty">Carregando…</div></div>`);
+  abrirSheet('Administração', body);
+  let casas = [], pessoas = [];
+  const carregar = async () => {
+    try {
+      const [c, u] = await Promise.all([getDocs(casasRef()), getDocs(usuariosRef())]);
+      casas = lerDocs(c).sort((a,b)=>String(a.nome).localeCompare(String(b.nome),'pt-BR'));
+      pessoas = lerDocs(u).map(p=>({...p, email:p.id}));
+    } catch(e) { console.error(e); body.innerHTML=''; body.appendChild(el(`<div class="banner">Não foi possível carregar. ${esc(msgErro(e))}</div>`)); return; }
+    desenhar();
+  };
+  const desenhar = () => {
+    body.innerHTML = '';
+    body.appendChild(el(`<p class="hint" style="margin:0">Cada casa é isolada: quem está numa casa não vê nem altera nada das outras. Você só administra o cadastro; os dados de cada casa ficam com quem mora nela.</p>`));
+    const novo = el(`<button class="btn primary block">Nova casa</button>`); novo.onclick = () => formCasa(null); body.appendChild(novo);
+    if (!casas.length) body.appendChild(el(`<div class="empty">Nenhuma casa cadastrada.</div>`));
+    casas.forEach(c=>{
+      const box = el(`<div class="adm-casa"><h4><span>${esc(c.nome)}</span><span><button class="btn-mini" data-a="renomear">Renomear</button> <button class="btn-mini" data-a="pessoa">+ Pessoa</button></span></h4></div>`);
+      box.querySelector('[data-a=renomear]').onclick = () => formCasa(c);
+      box.querySelector('[data-a=pessoa]').onclick = () => formPessoa(c, null);
+      const ms = pessoas.filter(p=>p.casaId===c.id).sort((a,b)=>(Number(a.ordem??99)-Number(b.ordem??99)));
+      if (!ms.length) box.appendChild(el(`<div class="hint">Ninguém cadastrado ainda.</div>`));
+      ms.forEach(p=>{
+        const row = el(`<div class="adm-p" style="--rc:${esc(p.cor||CORES_PESSOA[0])}"><div><div class="n">${esc(p.nome)}${p.admin?' · admin':''}</div><div class="e">${esc(p.email)} · chave ${esc(p.chave)}</div></div><button class="btn-mini">Editar</button></div>`);
+        row.querySelector('button').onclick = () => formPessoa(c, p);
+        box.appendChild(row);
+      });
+      body.appendChild(box);
+    });
+    const sem = pessoas.filter(p=>!casas.some(c=>c.id===p.casaId));
+    if (sem.length) body.appendChild(el(`<div class="hint">Sem casa válida: ${sem.map(p=>esc(p.email)).join(', ')}</div>`));
+    const pid = (CFG.firebase||{}).projectId;
+    body.appendChild(el(`<div class="hint">Lembrete: a senha de cada pessoa é criada no console do Firebase, em Authentication → Users, com o mesmo e-mail cadastrado aqui.${pid?` <a href="https://console.firebase.google.com/project/${esc(pid)}/authentication/users" target="_blank" rel="noopener">Abrir console</a>`:''}</div>`));
+  };
+  const formCasa = (c) => {
+    const m = {nome: c ? c.nome : ''};
+    const f = el(`<div class="stack"><div><label class="lbl" for="a-cn">Nome da casa</label><input class="inp" id="a-cn" maxlength="40" placeholder="ex.: Casa da Ana"></div></div>`);
+    f.querySelector('#a-cn').value = m.nome; f.querySelector('#a-cn').oninput = e => { m.nome = e.target.value; };
+    const ok = el(`<button class="btn primary block">${c ? 'Salvar' : 'Criar casa'}</button>`);
+    ok.onclick = async () => {
+      const nome = m.nome.trim(); if (!nome) return toast('Dê um nome à casa.');
+      const id = c ? c.id : slug(nome) + '-' + uid().slice(0,6);
+      const okk = await gravar(c ? updateDoc(casaRef(id), {nome}) : setDoc(casaRef(id), {nome, criadoEm:agora()}), c ? 'Casa renomeada' : `Casa "${nome}" criada`);
+      if (okk) { fecharSheet(); abrirAdmin(); }
+    };
+    f.appendChild(ok);
+    const volta = el(`<button class="btn block">Voltar</button>`); volta.onclick = () => { fecharSheet(); abrirAdmin(); }; f.appendChild(volta);
+    abrirSheet(c ? 'Renomear casa' : 'Nova casa', f);
+    setTimeout(()=>f.querySelector('#a-cn').focus(), 50);
+  };
+  const formPessoa = (c, p) => {
+    const irmaos = pessoas.filter(x=>x.casaId===c.id && (!p || x.email!==p.email));
+    const usadas = irmaos.map(x=>x.cor);
+    const m = p ? {email:p.email, nome:p.nome, chave:p.chave, cor:p.cor||CORES_PESSOA[0], chaveManual:true}
+                : {email:'', nome:'', chave:'', cor:CORES_PESSOA.find(x=>!usadas.includes(x))||CORES_PESSOA[0], chaveManual:false};
+    const f = el(`<div class="stack">
+      <div class="hint">Casa: <b>${esc(c.nome)}</b></div>
+      <div><label class="lbl" for="a-pe">E-mail (o mesmo do usuário criado no Firebase)</label><input class="inp" id="a-pe" type="email" autocapitalize="off" ${p?'disabled':''}></div>
+      <div><label class="lbl" for="a-pn">Nome (como aparece no app)</label><input class="inp" id="a-pn" maxlength="30"></div>
+      <div class="hint">Chave interna: <code id="a-pk">${esc(m.chave||'…')}</code>${p?' (não muda, para preservar os lançamentos)':''}</div>
+      <div><label class="lbl">Cor</label><div id="a-pc"></div></div>
+    </div>`);
+    const pe = f.querySelector('#a-pe'); pe.value = m.email; pe.oninput = e => { m.email = e.target.value.trim().toLowerCase(); };
+    const pn = f.querySelector('#a-pn'); pn.value = m.nome; pn.oninput = e => { m.nome = e.target.value; if (!m.chaveManual) { let k = slug(m.nome.split(' ')[0]); if (irmaos.some(x=>x.chave===k) || k==='conjunto') k += '-' + uid().slice(0,4); m.chave = k; f.querySelector('#a-pk').textContent = k; } };
+    f.querySelector('#a-pc').appendChild(swatchesPessoa(m, 'cor'));
+    const ok = el(`<button class="btn primary block">${p ? 'Salvar' : 'Cadastrar pessoa'}</button>`);
+    ok.onclick = async () => {
+      const email = m.email.trim().toLowerCase(), nome = m.nome.trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return toast('Informe um e-mail válido.');
+      if (!nome) return toast('Informe o nome.');
+      if (!p && pessoas.some(x=>x.email===email)) return toast('Esse e-mail já está cadastrado em uma casa.');
+      if (!p && irmaos.length >= 2) return toast('Uma casa comporta até duas pessoas.');
+      const dados = p ? {nome, cor:m.cor} : {casaId:c.id, nome, chave:m.chave||slug(nome), cor:m.cor, admin:false, ordem:irmaos.length, criadoEm:agora()};
+      const okk = await gravar(p ? updateDoc(usuarioRef(email), dados) : setDoc(usuarioRef(email), dados), p ? 'Pessoa atualizada' : `${nome} cadastrado em ${c.nome}`);
+      if (okk) { fecharSheet(); abrirAdmin(); }
+    };
+    f.appendChild(ok);
+    if (p && !p.admin) {
+      const del = el(`<button class="btn danger block">Remover ${esc(p.nome)} da casa</button>`); let armado=false;
+      del.onclick = async () => { if(!armado){armado=true;del.classList.add('arm');del.textContent='Confirmar remoção';setTimeout(()=>{armado=false;del.classList.remove('arm');del.textContent=`Remover ${p.nome} da casa`;},4000);return;} const okk = await gravar(deleteDoc(usuarioRef(p.email)), `${p.nome} removido. Os lançamentos ficam.`); if (okk) { fecharSheet(); abrirAdmin(); } };
+      f.appendChild(del);
+    }
+    const volta = el(`<button class="btn block">Voltar</button>`); volta.onclick = () => { fecharSheet(); abrirAdmin(); }; f.appendChild(volta);
+    abrirSheet(p ? 'Editar pessoa' : 'Nova pessoa', f);
+    setTimeout(()=>(p ? pn : pe).focus(), 50);
+  };
+  carregar();
 }
 function msgLogin(e){
   const c = (e && e.code) || '';
@@ -607,15 +825,18 @@ function buildForm(model, {modo, onSave, onDelete}){
     if (model.programada) f.appendChild(mkSwitch('Pago', 'Só um rótulo: não altera o cálculo', 'pago'));
     f.appendChild(mkSwitch('Já está no cartão de crédito', 'Não entra nas saídas nem no disponível; a fatura já conta. Aparece só na rosca por categoria', 'noCartao'));
   }
-  // responsável
-  const rw = el(`<div><label class="lbl">Responsável</label><div class="resp" role="group"></div></div>`);
-  RESP_ORDER.forEach(k=>{
-    const b = el(`<button class="${RESP[k].cls}">${RESP[k].nome}</button>`);
-    b.setAttribute('aria-pressed', model.responsavel===k);
-    b.onclick = () => { model.responsavel=k; model.erro=''; rerender(); };
-    rw.querySelector('.resp').appendChild(b);
-  });
-  f.appendChild(rw);
+  // responsável (casa de uma pessoa: não pergunta, é sempre ela)
+  if (casaSolo()) { model.responsavel = RESP_ORDER[0]; }
+  else {
+    const rw = el(`<div><label class="lbl">Responsável</label><div class="resp" role="group"></div></div>`);
+    RESP_ORDER.forEach(k=>{
+      const b = el(`<button style="--rc:${respCor(k)}">${esc(respNome(k))}</button>`);
+      b.setAttribute('aria-pressed', model.responsavel===k);
+      b.onclick = () => { model.responsavel=k; model.erro=''; rerender(); };
+      rw.querySelector('.resp').appendChild(b);
+    });
+    f.appendChild(rw);
+  }
   // data e descrição, cada uma na sua linha
   const progr = model.tipo==='saida' && model.programada;
   const row = el(`<div class="stack"><div><label class="lbl" for="f-data">${progr ? 'Vencimento' : 'Data'}</label><input class="inp" type="date" id="f-data"></div><div><label class="lbl" for="f-desc">Descrição</label><input class="inp" id="f-desc" placeholder="${progr ? 'ex.: Aluguel, Luz, Internet' : 'opcional'}" maxlength="120"></div></div>`);
@@ -681,10 +902,10 @@ function renderProgramadas(){
   if (!lista.length) { s.appendChild(el(`<div class="empty">Nenhuma conta programada. Ao lançar uma saída, ligue "Conta programada".</div>`)); return s; }
   const ul = el(`<div class="prog"></div>`);
   lista.forEach(l=>{
-    const r = RESP[l.responsavel]; const c = catInfo(l.categoria); const d = l.data ? diffDias(l.data) : 99;
+    const c = catInfo(l.categoria); const d = l.data ? diffDias(l.data) : 99;
     const venc = !l.pago && d <= DIAS_ALERTA;
     const quando = l.pago ? `Paga · venc. ${fmtDataLonga(l.data)}` : d < 0 ? `Venceu ${fmtDataLonga(l.data)}` : d === 0 ? 'Vence hoje' : d === 1 ? 'Vence amanhã' : `Vence ${fmtDataLonga(l.data)}`;
-    const item = el(`<div class="pg ${l.pago?'pago':''}" style="--rc:${r?r.v:'var(--ink-3)'}"><div class="n">${esc(l.descricao || c.nome)}</div><div class="v ${l.pago?'ok':''}">${fmt(l.valor)}</div><button class="tg" role="switch" aria-label="Paga" aria-checked="${!!l.pago}"></button><div class="d ${venc?'venc':''}">${quando} · ${r?r.nome:''}${l.noCartao?' · no cartão':''}</div></div>`);
+    const item = el(`<div class="pg ${l.pago?'pago':''}" style="--rc:${respCor(l.responsavel)}"><div class="n">${esc(l.descricao || c.nome)}</div><div class="v ${l.pago?'ok':''}">${fmt(l.valor)}</div><button class="tg" role="switch" aria-label="Paga" aria-checked="${!!l.pago}"></button><div class="d ${venc?'venc':''}">${quando}${casaSolo()?'':' · '+esc(respNome(l.responsavel))}${l.noCartao?' · no cartão':''}</div></div>`);
     item.querySelector('.tg').onclick = () => marcarPago(l.id, !l.pago);
     ul.appendChild(item);
   });
@@ -715,10 +936,11 @@ function renderPainel(mes){
   const cc = el(`<section class="card"><h2>Cartões de crédito <button class="btn-mini">+ Cartão</button></h2></section>`);
   cc.querySelector('.btn-mini').onclick = abrirNovoCartao;
   if (!state.cartoes.length) cc.appendChild(el(`<div class="empty">Nenhum cartão neste mês. Adicione um e informe o saldo atual da fatura.</div>`));
-  RESP_ORDER.forEach(k=>{
+  const chavesCartoes = RESP_ORDER.concat(state.cartoes.map(c=>c.responsavel).filter(k=>k && !RESP[k]));
+  [...new Set(chavesCartoes)].forEach(k=>{
     const lista = state.cartoes.filter(c=>c.responsavel===k).sort((a,b)=>String(a.nome).localeCompare(String(b.nome),'pt-BR'));
     if (!lista.length) return;
-    const g = el(`<div class="grp" style="--rc:${RESP[k].v}"><div class="grp-h">${RESP[k].nome}</div></div>`);
+    const g = el(`<div class="grp" style="--rc:${respCor(k)}">${casaSolo()?'':`<div class="grp-h">${esc(respNome(k))}</div>`}</div>`);
     lista.forEach(c=>{
       const item = el(`<div class="cc"><div><div class="n">${esc(c.nome)}</div><div class="v">${fmt(c.saldoAtual)}</div><div class="d">${c.ultimaAtualizacao ? 'Atualizado em '+fmtDataLonga(c.ultimaAtualizacao) : 'Sem atualização'}</div></div><button class="btn-mini">Atualizar</button></div>`);
       item.querySelector('button').onclick = () => abrirAtualizarCartao(c.id);
@@ -728,7 +950,7 @@ function renderPainel(mes){
   });
   w.appendChild(cc);
   w.appendChild(renderDonut());
-  w.appendChild(renderResp());
+  if (!casaSolo()) w.appendChild(renderResp());
   const ex = el(`<div class="export"><span>Exportar</span><button data-f="csv" data-s="mes">CSV do mês</button><button data-f="json" data-s="mes">JSON do mês</button><button data-f="csv" data-s="tudo">CSV de tudo</button><button data-f="json" data-s="tudo">JSON de tudo</button></div>`);
   ex.querySelectorAll('button').forEach(b=>b.onclick=()=>exportar(b.dataset.f, b.dataset.s));
   w.appendChild(ex);
@@ -776,7 +998,7 @@ function renderResp(){
   const vals = RESP_ORDER.map(k=>({k, v: sum(state.lancamentos.filter(l=>l.tipo==='saida'&&contaNoDisponivel(l)&&l.responsavel===k), l=>l.valor) + sum(state.cartoes.filter(c=>c.responsavel===k), c=>c.saldoAtual)}));
   const max = Math.max(...vals.map(x=>x.v), 0);
   vals.forEach(({k,v})=>{
-    bars.appendChild(el(`<div class="bar" style="--rc:${RESP[k].v}"><span class="lab">${RESP[k].nome}</span><div class="tr"><i style="width:${max>0?Math.round(v/max*100):0}%;${v===0?'display:none':''}"></i></div><span class="val">${fmt(v)}</span></div>`));
+    bars.appendChild(el(`<div class="bar" style="--rc:${respCor(k)}"><span class="lab">${esc(respNome(k))}</span><div class="tr"><i style="width:${max>0?Math.round(v/max*100):0}%;${v===0?'display:none':''}"></i></div><span class="val">${fmt(v)}</span></div>`));
   });
   return s;
 }
@@ -792,7 +1014,8 @@ function abrirNovoCartao(){
   </div>`);
   body.querySelector('#k-nome').oninput = e => { m.nome=e.target.value; };
   const rp = body.querySelector('.resp');
-  const drawR = () => { rp.innerHTML=''; RESP_ORDER.forEach(k=>{ const b=el(`<button class="${RESP[k].cls}">${RESP[k].nome}</button>`); b.setAttribute('aria-pressed', m.responsavel===k); b.onclick=()=>{m.responsavel=k;drawR();}; rp.appendChild(b); }); };
+  const drawR = () => { rp.innerHTML=''; RESP_ORDER.forEach(k=>{ const b=el(`<button style="--rc:${respCor(k)}">${esc(respNome(k))}</button>`); b.setAttribute('aria-pressed', m.responsavel===k); b.onclick=()=>{m.responsavel=k;drawR();}; rp.appendChild(b); }); };
+  if (casaSolo()) { m.responsavel = RESP_ORDER[0]; rp.parentElement.hidden = true; }
   drawR();
   ligarValor(body.querySelector('#k-valor'), m);
   const di = body.querySelector('#k-data'); di.value=m.data; di.onchange=()=>{ m.data=di.value||hoje(); };
@@ -813,9 +1036,8 @@ function abrirAtualizarCartao(id){
   const c = state.cartoes.find(x=>x.id===id); if (!c) return;
   const m = {cents: Math.round((Number(c.saldoAtual)||0)*100), data:hoje()};
   const hist = (c.historicoAtualizacoes||[]).slice().sort((a,b)=>String(a.data).localeCompare(String(b.data)));
-  const rc = RESP[c.responsavel];
   const body = el(`<div class="stack">
-    <div class="cc" style="--rc:${rc?rc.v:'var(--ink-3)'}"><div><div class="n">${esc(c.nome)} · ${rc?rc.nome:''}</div><div class="v">${fmt(c.saldoAtual)}</div><div class="d">${c.ultimaAtualizacao?'Atualizado em '+fmtDataLonga(c.ultimaAtualizacao):''}</div></div></div>
+    <div class="cc" style="--rc:${respCor(c.responsavel)}"><div><div class="n">${esc(c.nome)}${casaSolo()?'':' · '+esc(respNome(c.responsavel))}</div><div class="v">${fmt(c.saldoAtual)}</div><div class="d">${c.ultimaAtualizacao?'Atualizado em '+fmtDataLonga(c.ultimaAtualizacao):''}</div></div></div>
     <div><label class="lbl" for="k-valor">Novo saldo da fatura</label><div class="valor-wrap out"><span class="cur">R$</span><input id="k-valor" inputmode="numeric" placeholder="0,00" style="font-size:32px"></div><div class="hint" style="margin-top:6px">O valor substitui o saldo anterior; não é somado.</div></div>
     <div><label class="lbl" for="k-data">Data</label><input class="inp" type="date" id="k-data"></div>
   </div>`);
@@ -857,7 +1079,7 @@ function renderHistorico(){
   const f = state.filtros;
   const fl = el(`<div class="filters">
     <input class="inp" id="h-q" placeholder="Buscar na descrição" autocomplete="off">
-    <div class="fr" data-k="resp"><button class="pill" data-v="">Todos</button>${RESP_ORDER.map(k=>`<button class="pill ${RESP[k].cls}" data-v="${k}">${RESP[k].nome}</button>`).join('')}</div>
+    <div class="fr" data-k="resp" ${casaSolo()?'hidden':''}><button class="pill" data-v="">Todos</button>${RESP_ORDER.map(k=>`<button class="pill rc" style="--pc:${respCor(k)}" data-v="${esc(k)}">${esc(respNome(k))}</button>`).join('')}</div>
     <div class="fr" data-k="tipo"><button class="pill" data-v="">Entradas e saídas</button><button class="pill t-in" data-v="entrada">Entradas</button><button class="pill t-out" data-v="saida">Saídas</button></div>
     <select class="inp" id="h-cat" aria-label="Categoria"><option value="">Todas as categorias</option>${state.categorias.map(c=>`<option value="${esc(c.id)}" ${f.cat===c.id?'selected':''}>${esc(c.nome)}</option>`).join('')}</select>
   </div>`);
@@ -878,11 +1100,11 @@ function renderHistorico(){
     let dia=null;
     itens.forEach(l=>{
       if (l.data!==dia) { dia=l.data; lista.appendChild(el(`<div class="day">${fmtDataLonga(String(dia||''))}</div>`)); }
-      const c = catInfo(l.categoria); const r = RESP[l.responsavel];
-      const card = el(`<button class="lc" style="--rc:${r?r.v:'var(--ink-3)'};--cc:${esc(c.cor)}">
+      const c = catInfo(l.categoria);
+      const card = el(`<button class="lc" style="--rc:${respCor(l.responsavel)};--cc:${esc(c.cor)}">
         <div class="t"><span>${esc(l.descricao || c.nome)}</span></div>
         <div class="v ${l.tipo==='entrada'?'in':'out'}">${l.tipo==='entrada'?'+':'−'} ${fmt(l.valor)}</div>
-        <div class="m"><span class="rt">${r?r.nome:'?'}</span><span>${esc(c.nome)}</span></div>
+        <div class="m">${casaSolo()?'':`<span class="rt">${esc(respNome(l.responsavel))}</span>`}<span>${esc(c.nome)}</span></div>
         <div class="tags">${ehProgramada(l) ? `<span class="tag ${l.pago?'pago':'pend'}">${l.pago?'Paga':'Pendente'}</span>` : ''}${l.tipo==='saida' && l.noCartao ? '<span class="tag cartao">Cartão</span>' : ''}</div>
       </button>`);
       card.onclick = () => abrirEditar(l.id);
@@ -923,10 +1145,12 @@ function abrirSeletorMes(){
     exc.onclick = () => abrirExcluirMes(atual);
     body.appendChild(exc);
   }
+  if (state.admin) { const adm = el(`<button class="btn block">Administração</button>`); adm.onclick = () => { fecharSheet(); abrirAdmin(); }; body.appendChild(adm); }
   const sair = el(`<button class="btn block">Sair da conta${state.usuario?' ('+esc(state.usuario)+')':''}</button>`);
   sair.onclick = async () => { fecharSheet(); try { await signOut(auth); } catch(e){ toast('Não foi possível sair.'); } };
   body.appendChild(sair);
-  body.appendChild(el(`<div class="hint" style="text-align:center">Cofre a Dois · versão ${VERSAO}</div>`));
+  const quem = state.membros.map(m=>m.nome).join(' e ');
+  body.appendChild(el(`<div class="hint" style="text-align:center">${state.casa ? esc(state.casa.nome) + (quem ? ' · ' + esc(quem) : '') + '<br>' : ''}Cofre a Dois · versão ${VERSAO}</div>`));
   abrirSheet('Meses', body);
 }
 function abrirExcluirMes(mes){
@@ -984,8 +1208,8 @@ function abrirNovoMes(){
       lista.innerHTML = '';
       if (!m.itens.length) { lista.appendChild(el(`<div class="empty">Esse mês não tem lançamentos.</div>`)); cont.textContent=''; return; }
       m.itens.forEach(l=>{
-        const c = catInfo(l.categoria); const r = RESP[l.responsavel];
-        const row = el(`<label class="rep" style="--rc:${r?r.v:'var(--ink-3)'};--cc:${esc(c.cor)}"><input type="checkbox"><span class="rn"><span class="t">${esc(l.descricao || c.nome)}</span><span class="s">${esc(c.nome)} · ${r?r.nome:''}${ehProgramada(l)?' · programada':''}${l.noCartao?' · cartão':''}</span></span><span class="rv ${l.tipo==='entrada'?'in':'out'}">${l.tipo==='entrada'?'+':'−'} ${fmt(l.valor)}</span></label>`);
+        const c = catInfo(l.categoria);
+        const row = el(`<label class="rep" style="--rc:${respCor(l.responsavel)};--cc:${esc(c.cor)}"><input type="checkbox"><span class="rn"><span class="t">${esc(l.descricao || c.nome)}</span><span class="s">${esc(c.nome)}${casaSolo()?'':' · '+esc(respNome(l.responsavel))}${ehProgramada(l)?' · programada':''}${l.noCartao?' · cartão':''}</span></span><span class="rv ${l.tipo==='entrada'?'in':'out'}">${l.tipo==='entrada'?'+':'−'} ${fmt(l.valor)}</span></label>`);
         const ck = row.querySelector('input'); ck.checked = m.marcados.has(l.id);
         ck.onchange = () => { if (ck.checked) m.marcados.add(l.id); else m.marcados.delete(l.id); contar(); };
         lista.appendChild(row);
