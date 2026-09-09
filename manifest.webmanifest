@@ -1,13 +1,14 @@
 {
-  "name": "Cofre a Dois",
-  "short_name": "Cofre",
-  "description": "Controle financeiro do casal",
+  "name": "MeuSaldo",
+  "short_name": "MeuSaldo",
+  "description": "Controle financeiro da casa",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#F3F4F0",
+  "background_color": "#0F1117",
   "theme_color": "#0F6E63",
   "lang": "pt-BR",
   "icons": [
-    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+    { "src": "icon-180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
   ]
 }

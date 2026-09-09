@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Cofre a Dois</title>
+<title>MeuSaldo</title>
 <meta name="theme-color" content="#0F6E63">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Cofre">
+<meta name="apple-mobile-web-app-title" content="MeuSaldo">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="icon.svg">
+<link rel="icon" href="icon-180.png" type="image/png">
+<link rel="apple-touch-icon" href="icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -21,7 +21,7 @@
   --ink:#171A17; --ink-2:#585E59; --ink-3:#8B918C;
   --accent:#0F6E63; --accent-ink:#FFFFFF; --accent-soft:#DCEEE9;
   --in:#1E8A5A; --in-soft:#DEF3E7; --out:#C4453C; --out-soft:#F9E3E1;
-  --g:#2F6FD6; --j:#C2477A; --c:#D98A1F;
+  --g:#2F6FD6; --j:#C2477A; --c:#D98A1F; --verde:#15803D;
   --shadow:0 1px 2px rgba(23,26,23,.05),0 10px 28px -14px rgba(23,26,23,.22);
   --r:18px; --r-s:12px;
   --display:'Bricolage Grotesque','IBM Plex Sans',system-ui,sans-serif;
@@ -34,7 +34,7 @@
     --ink:#EEF0EC; --ink-2:#A9AFA9; --ink-3:#747B75;
     --accent:#3FB3A3; --accent-ink:#0B1512; --accent-soft:#173430;
     --in:#3FBF82; --in-soft:#15302A; --out:#E56A60; --out-soft:#3A201E;
-    --g:#5A8FE6; --j:#DA6A98; --c:#B8740C;
+    --g:#5A8FE6; --j:#DA6A98; --c:#B8740C; --verde:#22C55E;
     --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px -14px rgba(0,0,0,.6);
   }
 }
@@ -44,7 +44,7 @@
   --ink:#EEF0EC; --ink-2:#A9AFA9; --ink-3:#747B75;
   --accent:#3FB3A3; --accent-ink:#0B1512; --accent-soft:#173430;
   --in:#3FBF82; --in-soft:#15302A; --out:#E56A60; --out-soft:#3A201E;
-  --g:#5A8FE6; --j:#DA6A98; --c:#B8740C;
+  --g:#5A8FE6; --j:#DA6A98; --c:#B8740C; --verde:#22C55E;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px -14px rgba(0,0,0,.6);
 }
 *{box-sizing:border-box}
@@ -101,6 +101,10 @@ label.lbl{display:block;font-size:12px;color:var(--ink-2);font-weight:600;margin
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .inp{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:var(--r-s);padding:11px 12px;outline:none;min-height:44px}
 .inp:focus{border-color:var(--accent)}
+/* Safari do iPhone dá largura mínima própria ao campo de data e ele vaza pela direita; isto o obriga a respeitar a coluna */
+input[type="date"].inp,input[type="email"].inp,input[type="number"].inp{-webkit-appearance:none;appearance:none;min-width:0;max-width:100%;display:block}
+input[type="date"].inp::-webkit-date-and-time-value{text-align:left}
+.verde{color:var(--verde)}
 select.inp{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--ink-2) 50%),linear-gradient(135deg,var(--ink-2) 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:32px}
 .switch{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--surface-2);border-radius:var(--r-s)}
 .tg{width:46px;height:28px;border-radius:999px;background:var(--ink-3);position:relative;transition:background .15s;flex:none}
@@ -260,7 +264,11 @@ nav button svg{width:24px;height:24px}
 .login .quem button[aria-pressed="true"]{border-color:var(--rc);background:color-mix(in oklab,var(--rc) 12%,var(--surface))}
 /* administração */
 .adm-casa{background:var(--surface);border-radius:var(--r-s);padding:12px 14px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px}
-.adm-casa h4{margin:0;font-family:var(--display);font-size:16px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.adm-casa h4{margin:0;font-family:var(--display);font-size:16px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.adm-casa h4 .acoes{display:flex;gap:4px;flex-wrap:wrap}
+.btn-mini.perigo{background:var(--out-soft);color:var(--out)}
+.login .logo{overflow:hidden;background:none}
+.login .logo img{width:72px;height:72px;border-radius:20px;display:block}
 .adm-p{--rc:var(--ink-3);display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:6px 0;border-top:1px dashed var(--line)}
 .adm-p::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--rc)}
 .adm-p .n{font-weight:600} .adm-p .e{font-size:12px;color:var(--ink-2);overflow-wrap:anywhere}
@@ -275,7 +283,7 @@ nav button svg{width:24px;height:24px}
 
 <div class="app">
   <header class="top">
-    <div class="brand"><b>Cofre a Dois</b><small><span class="sync-dot" id="sync-dot"></span><span id="sync-txt">Conectando</span></small></div>
+    <div class="brand"><b>Meu<span class="verde">Saldo</span></b><small><span class="sync-dot" id="sync-dot"></span><span id="sync-txt">Conectando</span></small></div>
     <button class="mes-btn" id="mes-btn" aria-haspopup="dialog"><span id="mes-nome">…</span>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
   </header>
@@ -314,7 +322,7 @@ const CATS_PADRAO = [
   ['Mercado','#008300'],['Casa','#eb6834'],['Transporte','#2a78d6'],['Saúde','#e34948'],['Lazer','#e87ba4'],
   ['Assinaturas','#4a3aa7'],['Educação','#eda100'],['Salário','#1baf7a'],['Renda extra','#0e7c86'],['Outros','#8a8f98'],
 ];
-const VERSAO = '5'; // sobe a cada publicação; aparece no rodapé da folha "Meses"
+const VERSAO = '6'; // sobe a cada publicação; aparece no rodapé da folha "Meses"
 const MESES_PT = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 const brl = new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
 const fmt = v => brl.format(Number(v)||0);
@@ -520,12 +528,12 @@ function renderConfigPendente(){
     <p>O app ainda não sabe qual banco usar.</p>
     <div class="setup">Abra o arquivo <code>config.js</code> e cole o <code>firebaseConfig</code> do seu projeto no Firebase. O passo a passo completo está no <code>README.md</code>.</div></div>`);
 }
-const LOGO = `<div class="logo"><svg width="40" height="40" viewBox="0 0 512 512"><circle cx="256" cy="256" r="150" fill="none" stroke="#fff" stroke-width="34"/><circle cx="256" cy="256" r="46" fill="#fff"/></svg></div>`;
+const LOGO = `<div class="logo"><img src="icon-180.png" alt="" width="72" height="72"></div>`;
 function lembrarEmail(v){ try { if (v==null) return localStorage.getItem('cofre.email') || ''; localStorage.setItem('cofre.email', v); } catch(e){} return v; }
 function renderLogin(){
   const m = {email: lembrarEmail(), senha:''};
   const w = el(`<div class="login">${LOGO}
-    <div><h1>Cofre a Dois</h1><p>Entre com seu e-mail e senha.</p></div>
+    <div><h1>Meu<span class="verde">Saldo</span></h1><p>Entre com seu e-mail e senha.</p></div>
     <div><label class="lbl" for="l-email">E-mail</label><input class="inp" type="email" id="l-email" autocomplete="username" inputmode="email" autocapitalize="off" placeholder="voce@exemplo.com"></div>
     <div><label class="lbl" for="l-senha">Senha</label><input class="inp" type="password" id="l-senha" autocomplete="current-password" placeholder="••••••••"></div>
     <div class="err" role="alert" id="l-erro"></div>
@@ -556,7 +564,7 @@ function renderLogin(){
 function renderSemCasa(){
   const w = el(`<div class="login">${LOGO}
     <div><h1>Quase lá</h1><p>Você entrou como <b>${esc(state.email)}</b>, mas esse e-mail ainda não está vinculado a nenhuma casa.</p></div>
-    <div class="setup">Peça a quem administra o Cofre a Dois para cadastrar este e-mail em uma casa. Depois é só entrar de novo.</div>
+    <div class="setup">Peça a quem administra o MeuSaldo para cadastrar este e-mail em uma casa. Depois é só entrar de novo.</div>
   </div>`);
   const sair = el(`<button class="btn block">Sair</button>`); sair.onclick = () => signOut(auth); w.appendChild(sair);
   return w;
@@ -652,9 +660,11 @@ async function abrirAdmin(){
     const novo = el(`<button class="btn primary block">Nova casa</button>`); novo.onclick = () => formCasa(null); body.appendChild(novo);
     if (!casas.length) body.appendChild(el(`<div class="empty">Nenhuma casa cadastrada.</div>`));
     casas.forEach(c=>{
-      const box = el(`<div class="adm-casa"><h4><span>${esc(c.nome)}</span><span><button class="btn-mini" data-a="renomear">Renomear</button> <button class="btn-mini" data-a="pessoa">+ Pessoa</button></span></h4></div>`);
+      const minha = c.id === state.casaId;
+      const box = el(`<div class="adm-casa"><h4><span>${esc(c.nome)}${minha?' <small class="hint">(sua)</small>':''}</span><span class="acoes"><button class="btn-mini" data-a="renomear">Renomear</button> <button class="btn-mini" data-a="pessoa">+ Pessoa</button>${minha?'':' <button class="btn-mini perigo" data-a="excluir">Excluir</button>'}</span></h4></div>`);
       box.querySelector('[data-a=renomear]').onclick = () => formCasa(c);
       box.querySelector('[data-a=pessoa]').onclick = () => formPessoa(c, null);
+      if (!minha) box.querySelector('[data-a=excluir]').onclick = () => excluirCasa(c, pessoas.filter(p=>p.casaId===c.id));
       const ms = pessoas.filter(p=>p.casaId===c.id).sort((a,b)=>(Number(a.ordem??99)-Number(b.ordem??99)));
       if (!ms.length) box.appendChild(el(`<div class="hint">Ninguém cadastrado ainda.</div>`));
       ms.forEach(p=>{
@@ -668,6 +678,36 @@ async function abrirAdmin(){
     if (sem.length) body.appendChild(el(`<div class="hint">Sem casa válida: ${sem.map(p=>esc(p.email)).join(', ')}</div>`));
     const pid = (CFG.firebase||{}).projectId;
     body.appendChild(el(`<div class="hint">Lembrete: a senha de cada pessoa é criada no console do Firebase, em Authentication → Users, com o mesmo e-mail cadastrado aqui.${pid?` <a href="https://console.firebase.google.com/project/${esc(pid)}/authentication/users" target="_blank" rel="noopener">Abrir console</a>`:''}</div>`));
+  };
+  const excluirCasa = async (c, membros) => {
+    const body = el(`<div class="stack">
+      <div class="banner"><b>Isso não pode ser desfeito.</b> Serão apagados a casa <b>${esc(c.nome)}</b>, o cadastro de ${membros.length} pessoa${membros.length===1?'':'s'} (${membros.map(p=>esc(p.nome)).join(', ') || 'ninguém'}) e <span id="x-cont">todos os meses, lançamentos, cartões e categorias dela</span>. As outras casas não são afetadas. A senha da pessoa continua existindo no Firebase; apague-a lá se quiser.</div>
+      <div><label class="lbl" for="x-conf">Para confirmar, digite <b>EXCLUIR</b></label><input class="inp" id="x-conf" autocomplete="off" autocapitalize="characters" placeholder="EXCLUIR"></div>
+    </div>`);
+    const conf = body.querySelector('#x-conf');
+    const btn = el(`<button class="btn danger block" disabled>Excluir ${esc(c.nome)} definitivamente</button>`);
+    conf.oninput = () => { btn.disabled = conf.value.trim().toUpperCase() !== 'EXCLUIR'; btn.classList.toggle('arm', !btn.disabled); };
+    body.appendChild(btn);
+    const volta = el(`<button class="btn block">Cancelar</button>`); volta.onclick = () => { fecharSheet(); abrirAdmin(); }; body.appendChild(volta);
+    abrirSheet('Excluir casa', body);
+    // conta o que existe dentro da casa (o admin pode ler e apagar, nunca alterar)
+    const cols = ['meses','lancamentos','cartoes','categorias'];
+    let dados = null;
+    try {
+      const snaps = await Promise.all(cols.map(n => getDocs(collection(fdb, 'casas', c.id, n))));
+      dados = {}; cols.forEach((n,i) => { dados[n] = snaps[i].docs.map(d => d.ref); });
+      body.querySelector('#x-cont').textContent = `${dados.meses.length} meses, ${dados.lancamentos.length} lançamentos, ${dados.cartoes.length} cartões e ${dados.categorias.length} categorias`;
+    } catch(e) { console.error(e); body.querySelector('#x-cont').textContent = 'os dados dela (não consegui contar: regras do Firestore desatualizadas?)'; }
+    btn.onclick = async () => {
+      btn.disabled = true; btn.textContent = 'Excluindo…';
+      try {
+        if (!dados) throw Object.assign(new Error('sem leitura'), {code:'permission-denied'});
+        const refs = cols.flatMap(n => dados[n]);
+        for (let i = 0; i < refs.length; i += 400) { const b = writeBatch(fdb); refs.slice(i, i+400).forEach(r => b.delete(r)); await b.commit(); }
+        const b2 = writeBatch(fdb); membros.forEach(p => b2.delete(usuarioRef(p.email))); b2.delete(casaRef(c.id)); await b2.commit();
+        toast(`Casa ${c.nome} excluída`); fecharSheet(); abrirAdmin();
+      } catch(e) { console.error(e); toast(msgErro(e)); btn.textContent = 'Tentar de novo'; btn.disabled = false; }
+    };
   };
   const formCasa = (c) => {
     const m = {nome: c ? c.nome : ''};
@@ -1150,7 +1190,7 @@ function abrirSeletorMes(){
   sair.onclick = async () => { fecharSheet(); try { await signOut(auth); } catch(e){ toast('Não foi possível sair.'); } };
   body.appendChild(sair);
   const quem = state.membros.map(m=>m.nome).join(' e ');
-  body.appendChild(el(`<div class="hint" style="text-align:center">${state.casa ? esc(state.casa.nome) + (quem ? ' · ' + esc(quem) : '') + '<br>' : ''}Cofre a Dois · versão ${VERSAO}</div>`));
+  body.appendChild(el(`<div class="hint" style="text-align:center">${state.casa ? esc(state.casa.nome) + (quem ? ' · ' + esc(quem) : '') + '<br>' : ''}MeuSaldo · versão ${VERSAO}</div>`));
   abrirSheet('Meses', body);
 }
 function abrirExcluirMes(mes){
@@ -1265,7 +1305,7 @@ async function exportar(formato, escopo){
   } catch(e) { toast('Não foi possível ler os dados para exportar.'); return; }
   const mesNome = id => (state.meses.find(m=>m.id===id)||{}).nome || id;
   const mesSel = state.meses.find(m=>m.id===state.mesSel);
-  const base = escopo==='tudo' ? 'cofre-a-dois-tudo' : 'cofre-a-dois-'+String(mesSel?mesSel.nome:'mes').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  const base = escopo==='tudo' ? 'meu-saldo-tudo' : 'meu-saldo-'+String(mesSel?mesSel.nome:'mes').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
   let filename, data;
   if (formato==='json') {
     filename = base+'.json';
